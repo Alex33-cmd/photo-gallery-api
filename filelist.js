@@ -9,29 +9,24 @@ readdir(dir, (err, files) => {
     throw err;
   }
 
-  // files object contains all files names
-  // log them on console
+  // files array contains all file names
   files.forEach((file) => {
-    console.log(file);
-    const text = `{
-    "title":"${file.slice(0, -4)}",
-    "type":"film",
-    "url":"./${file}",
-}\r\n`;
+    // storing every file info in object
+    const text = {
+      title: `${file.slice(0, -4)}`,
+      type: `film`,
+      url: `./${file}`,
+    };
 
-    appendFile("./list.txt", text, (err) => {
+    // adding newlines and a couple of indentations to JSON
+    const data = JSON.stringify(text, null, 2);
+
+    // writing a JSON file
+    appendFile("./filelist.json", data, (err) => {
       if (err) {
         console.error(err);
       }
     });
   });
-
-  //   console.log(files);
-
-  //   writeFile("./list.txt", files.join("\r\n"), (err) => {
-  //     if (err) {
-  //       console.error(err);
-  //     }
-  //     console.log("file written successfully");
-  //   });
+  console.log(files);
 });
