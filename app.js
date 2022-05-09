@@ -9,6 +9,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+const PORT = process.env.PORT || 5000;
 
 if (process.env.NODE_ENV !== "production") {
   dotenv.config();
@@ -98,6 +99,4 @@ app.post("/photos", (req, res) => {
   });
 });
 
-app.listen(3000, function () {
-  console.log("Server started on port 3000");
-});
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
