@@ -8,6 +8,11 @@
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config();
+}
 
 const app = express();
 
@@ -20,7 +25,8 @@ app.use(express.static("public"));
 
 // connect our application to the MongoDB location and add the database name to the URL string
 mongoose
-  .connect("mongodb://localhost:27017/photo-gallery", {
+  // .connect("mongodb://localhost:27017/photo-gallery", {
+  .connect(process.env.DATABASE_URL, {
     useNewUrlParser: true,
   })
   .then(() => {
